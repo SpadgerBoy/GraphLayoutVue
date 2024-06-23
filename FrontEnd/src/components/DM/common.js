@@ -62,30 +62,3 @@ export default {
 }
 
 
-
-
-/*
-import readParameters from './read_params.js';
-readParameters()
-  .then(params => {
-    //get_networks(params)
-    const array1 = params['node_attr_local']
-    //var node_attr1 = createNMArray(15, 128, array1)
-    const array2 = params['edge_index']
-    var edge_index1 = createNMArray(2, 178, array2)
-    console.log(edge_index1)
-    const array3 = params['edge_attr_local']
-    //var edge_attr1 = createNMArray(178, 128, array3)
-   // assemble_node_pair_feature(node_attr1, edge_index1, edge_attr1)
-    const N = 15;
-    const E = 178;
-    const hidden_dim = 128;
-    const dims = [[N, hidden_dim], [2, E], [E, hidden_dim]]
-    //assemble_node_pair_feature_1(array1, array2, array3, dims)
-  })
-
-  .catch(error => {
-    console.error(error);
-  });*/
-
-

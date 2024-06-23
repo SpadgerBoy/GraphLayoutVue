@@ -155,7 +155,7 @@ export function opeArrays(array1, num2, ope) {
   return result;
 };
 
-
+/*
 function scatter_mean(array1, array2) {
     var sums = {};
     var counts = {};
@@ -190,6 +190,33 @@ export function center_pos(array1, array2) {
     }
   
     return pos_center;
+}
+*/
+function scatter_mean(array1) {
+  var sums = {};
+  var counts = {};
+  sums = [0, 0]
+  for (var i = 0; i < array1.length; i++) {
+    sums[0] += array1[i][0];
+    sums[1] += array1[i][1];
+  }
+
+  var means = [0,0];
+  means[0] = sums[0] / array1.length;
+  means[1] = sums[1] / array1.length;
+
+  return means;
+}
+
+export function center_pos(array1) {
+  var means = scatter_mean(array1);
+  var pos_center = [];
+
+  for (var i = 0; i < array1.length; i++) {
+    pos_center.push([array1[i][0] - means[0], array1[i][1] - means[1]]);
+  }
+
+  return pos_center;
 }
 
 function generateNoise(size) {
@@ -253,14 +280,7 @@ export function randn_like(dims) {
   // 示例用法
   var pos = [[1, 2], [3, 4], [5, 6]];
   
-  var eps_linker = generateNormalDistribution([3, 2]);
+  // var eps_linker = generateNormalDistribution([3, 2]);
   //console.log(eps_linker);
 
-  
-  // 示例用法
-  var pos = [[1, 2], [3, 4], [5, 6]];
-  var batch = [0, 1, 0];
-  
-  var pos_center = center_pos(pos, batch);
-  //console.log(pos_center); // 输出 [[-2, -2], [0, 0], [2, 2]]
 

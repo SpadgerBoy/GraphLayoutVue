@@ -1,3 +1,4 @@
+// import ort from 'onnxruntime-web/webgpu';
 import ort from 'onnxruntime-web';
 import {createArray, createNMArray, opeNMArrays,  center_pos, randn_like, generateNormalDistribution as torch_randn} from './tools.js'
 
@@ -28,11 +29,11 @@ class DiffModel {
     const N = pos.length;
     const E = edge_type.length;
 
-    //node_emb = createArray(node_emb);
-    //node_level = createArray(node_level);
+    // node_emb = createArray(node_emb);
+    // node_level = createArray(node_level);
     pos = createArray(pos);
-    //edge_index = createArray(edge_index);
-    //edge_type = createArray(edge_type);
+    // edge_index = createArray(edge_index);
+    // edge_type = createArray(edge_type);
 
     var node_emb_tensor = new ort.Tensor('float32', node_emb, [N, 3]);
     var node_level_tensor = new ort.Tensor('int64', node_level, [N, 1]);
@@ -54,7 +55,7 @@ class DiffModel {
     return pos_noise;
   }
 
-  async test(onnx_path, node_emb, node_type, node_level, pos_init, edge_index, edge_type, batch, num_graphs, extend_order=false, extend_radius=true){
+  async test(onnx_path, node_emb, node_level, pos_init, edge_index, edge_type, num_graphs){
     
     var alpha = get_sqrt(this.betas);
     var betas = this.betas;
@@ -63,7 +64,8 @@ class DiffModel {
 
     var pos = pos_init
 
-    pos = center_pos(pos_init, batch);
+    // pos = center_pos(pos_init, batch);
+    pos = center_pos(pos_init);
 
     var seq = []
     for (var ii = steps-1; ii >= 0; ii--) {
@@ -76,7 +78,7 @@ class DiffModel {
     for(var i of seq){
 
       var j = i-1;
-      var t = Array(num_graphs).fill(i)
+      var t = Array(num_graphs).fill(i);
 
       var pos_noise_predict = await this.onnx_infer(onnx_session, node_emb, node_level, pos, edge_index, edge_type);
       
@@ -102,7 +104,8 @@ class DiffModel {
 
       //console.log('pos_:', pos_next);
       pos = pos_next;
-      pos = center_pos(pos, batch);
+      // pos = center_pos(pos, batch);
+      pos = center_pos(pos);
 
       if (pos.some(Number.isNaN)) {
         console.log('NaN detected. Please restart.');
