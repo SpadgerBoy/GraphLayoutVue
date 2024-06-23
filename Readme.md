@@ -30,7 +30,7 @@ Run Code:
 
 pnpm run serve
 
-pnpmrun build
+pnpm run build
 
 ```
 
