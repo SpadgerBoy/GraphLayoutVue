@@ -28,9 +28,7 @@ Run Code:
 
 ```bash
 
-pnpm run serve
-
-pnpm run build
+pnpm run start
 
 ```
 

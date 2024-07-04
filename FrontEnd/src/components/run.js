@@ -1,21 +1,28 @@
 
 import DiffModel from "./DM/DM.js";
-import {createNMArray, randn_like, generateNormalDistribution as torch_randn} from './DM/tools.js'
+import {createNMArray, } from './DM/tools.js'
 import convertGridToCart from './data_process/coordinate_homogenization.js'
 import getData from './data_process/get_data.js'
 
-var config = {
+const config = {
     beta_start: 0.001,
     beta_end: 0.02,
     steps: 200,
     hidden_dim: 128,
+    model: "./onnx/GLM200.onnx",
 };
 
-export default async function run_onnx(N, all_edges) {
-  let DM = new DiffModel(config);
-
+// const config = {
+//   beta_start: 0.001,
+//   beta_end: 0.02,
+//   steps: 100,
+//   hidden_dim: 128,
+//   model: "./onnx/GLM100.onnx",
+// };
+export default async function get_new_graph(N, all_edges) {
+  const time1 = performance.now();
   
-  var onnx_path = './onnx/train200_adam/GLM.onnx';
+  let DM = new DiffModel(config);
 
   var repoense = await getData(N, all_edges);
 
@@ -26,16 +33,23 @@ export default async function run_onnx(N, all_edges) {
   var edge_type = repoense.edge_type;
   var num_graphs = 1;
 
+  const time2 = performance.now();
+
 
   pos_init = createNMArray(pos_init, N, 2);
 
-  var pos = await DM.test(onnx_path, node_emb, node_level, pos_init, edge_index, edge_type, num_graphs);  
-  
+  var pos = await DM.run(node_emb, node_level, pos_init, edge_index, edge_type, num_graphs);  
+
   pos = convertGridToCart(pos, node_level);
-  // console.log('pos_gen', pos);
+  console.log('pos_gen', pos);
+
+  const time3 = performance.now();
+
+  console.log('onnx_time:',(time3 - time2)/1000, 'total_time:',(time3 - time1)/1000);
+
 
   return pos;
 
 };
-// export default run_onnx;
+
 

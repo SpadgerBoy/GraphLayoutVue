@@ -1,3 +1,6 @@
+// import { GPU } from 'gpu.js';
+// const gpu = new GPU();
+
 export function arraycat(array1, array2){
   var concatenated = [];
 
