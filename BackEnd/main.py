@@ -34,6 +34,7 @@ def process_data():
     return jsonify(response)
 
 
+
 if __name__ == "__main__":
     print('run 10.1.114.77:14449')
     app.run(host='10.1.114.77', port=14449)
