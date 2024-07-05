@@ -6,19 +6,19 @@ import {createNMArray, } from './DM/tools.js'
 import convertGridToCart from './data_process/coordinate_homogenization.js'
 import getData from './data_process/get_data.js'
 
-//配置模型参数
-// const config = {
-//     beta_start: 0.001,
-//     beta_end: 0.02,
-//     steps: 200,
-//     model: "./onnx/GLM200.onnx",
-// };
+// 配置模型参数
 const config = {
-  beta_start: 0.001,
-  beta_end: 0.02,
-  steps: 100,
-  model: "./onnx/GLM100.onnx",
+    beta_start: 0.001,
+    beta_end: 0.02,
+    steps: 200,
+    model: "./onnx/GLM200.onnx",
 };
+// const config = {
+//   beta_start: 0.001,
+//   beta_end: 0.02,
+//   steps: 100,
+//   model: "./onnx/GLM100.onnx",
+// };
 
 export default async function get_new_pos(N, all_edges) {
   
