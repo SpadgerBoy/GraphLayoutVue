@@ -36,7 +36,6 @@ def process_data():
 
 if __name__ == "__main__":
     print('run 10.1.114.77:14449')
-    #load_tabular_dataset(node_num, all_edges)
     app.run(host='10.1.114.77', port=14449)
 
     

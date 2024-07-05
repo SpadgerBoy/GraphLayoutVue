@@ -1,10 +1,10 @@
 ### BackEnd:
 
-相关以来的版本：
+#### 1.相关依赖：
+
+相关依赖的版本：
 
 cuda=11.8, python3.8，pytorch2.1，
-
-
 
 根据requirements.txt安装相关依赖，
 
@@ -20,9 +20,20 @@ pip install *.whl
 
 
 
+#### 2.配置IP和端口：
+
+在main.py中配置服务器对应的IP和端口：
+
+```python
+if __name__ == "__main__":
+    print('run xx.xx.xx.xx:xxxx')
+    app.run(host='xx.xx.xx.xx', port=xxxx)
+
+```
 
 
-run code:
+
+#### 3.run code:
 
 处理来来自前端的数据
 
@@ -85,7 +96,7 @@ server.js:
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 8080;		//与端口对应
+const port = 8080;		//与前端端口对应，一般为8080
 
 // 设置 Cross-Origin-Opener-Policy 和 Cross-Origin-Embedder-Policy 响应头
 app.use((req, res, next) => {
@@ -106,13 +117,23 @@ app.listen(port, () => {
 });
 ```
 
-#### 2.文件./src/APP.vue
+#### 2.配置接收服务器的IP与端口：
+
+运行前首先将.\src\components\data_process\get_data.js中IP与端口修改为服务器端的IP与端口
+
+```js
+const response = await axios.post('http://xx.xx.xx.xx:xxxx/getdata', datajson);
+```
+
+
+
+#### 3.文件./src/APP.vue
 
 将图网络的**拓扑结构**（所有的边）all_edges与节点数量N传入该文件中，该文件将调用./src/components/run.js处理这些参数
 
 
 
-#### 3.文件./src/components/run.js
+#### 4.文件./src/components/run.js
 
 配置模型的参数：
 
@@ -137,7 +158,7 @@ const config = {
 
 
 
-get_new_graph()函数首先将N和all_edges传给后端，接收所需的下列参数：
+get_new_graph()函数调用.\src\components\data_process\get_data.js,首先将N和all_edges传给后端，接收所需的下列参数：
 
 ```js
   const node_emb = repoense.node_emb;
@@ -151,7 +172,7 @@ get_new_graph()函数首先将N和all_edges传给后端，接收所需的下列�
 
 
 
-#### 4.文件./src/components/Vis.vue
+#### 5.文件./src/components/Vis.vue
 
 根据all_edges和新的pos画图
 
