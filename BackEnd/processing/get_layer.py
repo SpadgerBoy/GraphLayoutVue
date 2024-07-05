@@ -60,10 +60,7 @@ if __name__ == '__main__':
                  [71, 86], [72, 87], [73, 81], [74, 87], [75, 88], [75, 84], [76, 82], [77, 87], [77, 89], [78, 86],
                  [79, 90], [79, 81], [80, 84], [81, 92], [81, 97], [82, 94], [82, 92], [83, 96], [83, 95], [84, 93],
                  [85, 96], [86, 92], [86, 97], [87, 96], [88, 92], [89, 94], [89, 99], [90, 91], [90, 98]]
-    node_level0 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4,
-                  4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7,
-                  7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10,
-                  10]
+
     node_num = 100
 
     all_edges = torch.tensor(edges)
@@ -74,24 +71,5 @@ if __name__ == '__main__':
     
     print(node_level)
 
-
-
-    torch.onnx.export(model,
-                      (node_num, all_edges),
-                      "data_process.onnx",
-                      input_names=['node_num', 'all_edges'],
-                      output_names=[
-                        'node_level',
-                        #'pos_init'
-                      ],
-                      dynamic_axes={
-                          'all_edges': {0: 'edges_num'},
-                          'node_level': {0: 'nodes_num'},
-                          #'pos_init':{0: 'nodes_num'}
-                      }
-                      )
-    print('onnx\n\n\n')
-    #edges1 = all_edges.numpy()
-    #onnx_run(100, edges1)
     
 

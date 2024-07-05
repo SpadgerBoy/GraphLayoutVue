@@ -35,7 +35,6 @@ export default class DiffModel {
     
     this.alphas = get_alphas(this.betas);
     this.steps = config.steps;
-    this.hiddem_dim = config.hiddem_dim;
     this.opt = {
       executionProviders: [],
       enableMemPattern: false,
@@ -102,7 +101,7 @@ export default class DiffModel {
     return pos_noise;
   }
 
-  async run(node_emb, node_level, pos_init, edge_index, edge_type, num_graphs){
+  async run(node_emb, node_level, pos_init, edge_index, edge_type){
 
     //查看WEBGPU是否可用
     this.init();
