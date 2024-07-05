@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 安装完对应版本pytorch后可安装requirements/文件夹下的四个轮子.whl
 
-```
+```bash
 pip install *.whl
 ```
 
