@@ -19,6 +19,9 @@
 </template>
 
 <script>
+/**
+ * 根据pos和all_edges画出图
+ */
 
 export default {
   name: 'Vis',

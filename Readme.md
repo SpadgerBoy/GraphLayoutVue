@@ -129,7 +129,7 @@ const response = await axios.post('http://xx.xx.xx.xx:xxxx/getdata', datajson);
 
 #### 3.文件./src/APP.vue
 
-将图网络的**拓扑结构**（所有的边）all_edges与节点数量N传入该文件中，该文件将调用./src/components/run.js处理这些参数
+从一个txt文件中读取节点数量N和图的所有边all_edges，该文件将调用./src/components/run.js处理这些参数
 
 
 
@@ -154,7 +154,7 @@ const config = {
 };
 ```
 
-其中steps和model为对应的扩散步数和相应的onnx路径，可以选择step=200和step=100两种
+其中steps和model为对应的扩散步数和相应的onnx路径，可以选择step=200和step=100两种，**step=200时效果更好但时间更长**
 
 
 
@@ -163,7 +163,7 @@ get_new_graph()函数调用.\src\components\data_process\get_data.js,首先将N�
 ```js
   const node_emb = repoense.node_emb;
   const node_level = repoense.node_level;
-  const pos_init = repoense.pos_init;
+  var pos_init = repoense.pos_init;
   const edge_index = repoense.edge_index;
   const edge_type = repoense.edge_type;
 ```

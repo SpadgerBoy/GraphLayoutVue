@@ -1,3 +1,4 @@
+/** 将坐标间距均匀化 */
 export default function convertGridToCart(pos, level) {
     /*
     Args:
