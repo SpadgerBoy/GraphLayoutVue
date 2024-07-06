@@ -1,3 +1,17 @@
+'''
+用于对图数据进行预处理和增强
+CountNodesPerGraph()：计算每个图中的节点数量。
+AddUndirectedEdge()：将图中的边转换为无向边。
+AddNodeType()：为每个节点添加节点类型信息。
+AddNodeMask(node_mask=0.0)：为每个节点添加节点掩码，节点掩码的默认值为0.0。
+AddNodeDegree()：为每个节点添加节点度信息。
+AddLaplacianEigenvectorPE(k=3)：添加拉普拉斯特征向量，用于离线边增强，默认k=3。
+AddRandomWalkPE()：添加随机游走特征向量，用于离线边增强。
+AddEdgeType()：为每个边添加边类型信息。
+AddHigherOrderEdges(order=3)：添加高阶边，用于离线边增强，默认order=3。
+AddFragmentEdge()：添加片段边，用于离线边增强。
+'''
+
 import copy
 import torch
 from torch_geometric.data import Data

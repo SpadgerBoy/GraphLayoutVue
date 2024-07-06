@@ -1,10 +1,10 @@
 /**
  * 根据N、all_edges由模型计算出新的坐标分配
  */
-import DiffModel from "./DM/DM.js";
-import {createNMArray, } from './DM/tools.js'
-import convertGridToCart from './data_process/coordinate_homogenization.js'
-import getData from './data_process/get_data.js'
+import DiffusionModel from "./utility/diffusion_model.js";
+import {createNMArray, } from './utility/tools.js'
+import convertGridToCart from './utility/coordinate_homogenization.js'
+import getData from './utility/get_data.js'
 
 // 配置模型参数
 const config = {
@@ -36,8 +36,8 @@ export default async function get_new_pos(N, all_edges) {
   pos_init = createNMArray(pos_init, N, 2);
 
   //初始化DiffModel
-  let DM = new DiffModel(config);
-  var pos = await DM.run(node_emb, node_level, pos_init, edge_index, edge_type);  
+  let DiffModel = new DiffusionModel(config);
+  var pos = await DiffModel.run(node_emb, node_level, pos_init, edge_index, edge_type);  
 
   //将坐标均匀化
   pos = convertGridToCart(pos, node_level);

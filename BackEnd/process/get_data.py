@@ -1,4 +1,6 @@
-
+'''
+根据N、all_edges获取数据所需要数据node_emb, node_level, pos_init, edge_index, edge_type
+'''
 import matplotlib.pyplot as plt
 import math
 import numpy as np
@@ -10,33 +12,34 @@ from natsort import natsorted
 import onnxruntime as ort
 import networkx as nx
 
-import os
-import pickle
-import copy
-import json
 from collections import defaultdict
-from processing.transforms import *
-from processing.get_layer import layer_graph
+from process.transforms import *
+from process.get_layer import layer_graph
 #from transforms import *
 #from try_layer import layer_graph
 import torch
 from torch_geometric.data import Data, Dataset, Batch
 
-
 def get_graph_data(all_edges, node_level):
+     
+    r'''
+    根据网络拓扑结构进行第一步的预处理，使用torch_geometric.data 将图数据打包
+    '''
 
-        edge_list = np.array(all_edges).tolist()
+    edge_list = np.array(all_edges).tolist()
 
-        #torch_pos = torch.tensor(pos_list, dtype=torch.float32)
-        torch_edge_index = torch.tensor(edge_list, dtype=torch.long)
-        torch_edge_index = torch.transpose(torch_edge_index, 0, 1)
-        node_level = torch.tensor(node_level, dtype=torch.long)
+    #torch_pos = torch.tensor(pos_list, dtype=torch.float32)
+    torch_edge_index = torch.tensor(edge_list, dtype=torch.long)
+    torch_edge_index = torch.transpose(torch_edge_index, 0, 1)
+    node_level = torch.tensor(node_level, dtype=torch.long)
 
-        data = [Data(num_nodes=len(node_level), edge_index=torch_edge_index, graph_name='graph1', level=node_level)]
-        return data
+    data = [Data(num_nodes=len(node_level), edge_index=torch_edge_index, graph_name='graph1', level=node_level)]
+    return data
 
 class GraphLayoutDataset(Dataset):
-
+    r'''
+    调用transforms对数据打包的图数据进行预处理，以获得预期的图拓扑信息
+    '''
     def __init__(self, data=None, transform=None):
         super().__init__()
         self.data = data
@@ -66,23 +69,25 @@ class data_process(nn.Module):
             AddNodeMask(node_mask=0.0),
             AddNodeDegree(),
             AddLaplacianEigenvectorPE(k=3),  # Offline edge augmentation
-            # AddRandomWalkPE(walk_length=int(config.model.laplacian_eigenvector)),
+            #AddRandomWalkPE(walk_length=int(config.model.laplacian_eigenvector)),
             AddEdgeType(),
             AddHigherOrderEdges(order=3),  # Offline edge augmentation
-            # AddFragmentEdge(fragment_edge_type=config.model.fragment_edge_type),
+            #AddFragmentEdge(fragment_edge_type=config.model.fragment_edge_type),
         ])
 
+        # 获得分层信息
         node_level = layer_graph(all_edges)
-        #print(node_level)
+        # 对图数据进行进行初步预处理，并打包
         data = get_graph_data(all_edges, node_level)
-        # new_data = PackedGraphLayoutDataset(data, transform=transforms)
+        # 根据初步预处理的数据，使用transforms对其进行再次预处理
         new_data = GraphLayoutDataset(data, transform=transforms)
-        # print(new_data[0])
+        
+        # 得到我们预期的预处理信息
         node_emb = new_data[0].node_emb.tolist()
-       
-        pos_init = torch.randn(node_num, 2).tolist()
         edge_index = new_data[0].edge_index.tolist()
         edge_type = new_data[0].edge_type.tolist()
+        # 随机生成一个服从正态分布的正态分布坐标（初始噪音）
+        pos_init = torch.randn(node_num, 2).tolist()
 
         print(
             f'Response data:'

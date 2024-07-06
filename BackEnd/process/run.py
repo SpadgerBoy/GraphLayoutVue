@@ -1,49 +1,13 @@
+from process.get_data import data_process
+#from get_data import data_process
+tabular_dataset = []
 
-import matplotlib.pyplot as plt
-import math
-import numpy as np
-import torch
-import torch.nn as nn
-from torch_geometric.data import Data
-import pickle, os
-import random
-import pdb
-import csv, ast
-from natsort import natsorted
-import onnxruntime as ort
-import networkx as nx
-import pygraphviz as pgv
+def get_dataset(node_num, all_edges):
 
+    data_model = data_process()
+    node_emb, node_level, pos_init, edge_index, edge_type = data_model(node_num, all_edges)
 
-def layer_graph(all_edges):
-        # Create a directed graph
-        G = nx.DiGraph()
-
-        # Add edges to the graph
-        for edge in all_edges:
-            G.add_edge(int(edge[0]), int(edge[1]))
-
-        # Use pygraphviz to create a layout
-        A = nx.nx_agraph.to_agraph(G)
-        A.layout(prog='dot')
-
-        layers = {}
-        for node in A.nodes():
-            pos = node.attr['pos']
-            if pos:
-                x, y = map(float, pos.split(','))
-                if y not in layers:
-                    layers[y] = []
-                layers[y].append(int(node))
-
-        sorted_layers = [layers[key] for key in sorted(layers.keys(), reverse=True)]
-
-        node_level = [0 for _ in range(len(A.nodes()))]
-        for i, nodes in enumerate(sorted_layers):
-            for j, node in enumerate(nodes):
-                node_level[int(node)] = i+1
-
-        return node_level
+    return node_emb, node_level, pos_init, edge_index, edge_type
 
 if __name__ == '__main__':
 
@@ -63,13 +27,9 @@ if __name__ == '__main__':
 
     node_num = 100
 
-    all_edges = torch.tensor(edges)
+    # all_edges = torch.tensor(edges)
 
-    model = data_process()
 
-    node_level = model(node_num, all_edges)
+    node_emb, node_level, pos_init, edge_index, edge_type = get_dataset(node_num, edges)
     
-    print(node_level)
-
-    
-
+    print(node_emb, '\n', node_level, '\n', pos_init, '\n', edge_index, '\n', edge_type,)

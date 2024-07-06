@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from processing.run import * 
+from process.run import * 
 
 import os, random
 

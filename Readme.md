@@ -1,10 +1,16 @@
-### BackEnd:
+### 一、BackEnd:
 
 #### 1.相关依赖：
 
 相关依赖的版本：
 
-cuda=11.8, python3.8，pytorch2.1，
+```bash
+conda create -n DiffModel python=3.8
+
+conda activate DiffModel
+
+conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+```
 
 根据requirements.txt安装相关依赖，
 
@@ -45,7 +51,7 @@ python main.py
 
 
 
-### FrontEnd:
+### 二、FrontEnd:
 
 安装**pnpm**:
 

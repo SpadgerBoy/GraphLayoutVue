@@ -21,7 +21,7 @@ steps=100:
 */ 
 
 // Diffusion Model
-export default class DiffModel {
+export default class DiffusionModel {
 
   constructor(config) {
 
