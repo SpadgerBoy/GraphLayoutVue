@@ -34,6 +34,7 @@ def layer_graph(all_edges):
 
         return node_level
 
+
 if __name__ == '__main__':
 
     edges = [[0, 21], [1, 13], [2, 21], [2, 16], [3, 16], [4, 10], [5, 21], [5, 20], [6, 21], [6, 20], [7, 16],

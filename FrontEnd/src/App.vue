@@ -14,7 +14,7 @@
 
 /**
  * 从pubilc/all_edges.txt读取图的拓扑结构，包括节点数量N和边all_edges
- * 然后将N和all_edges传入run.js运算得到层次布局下每个结点的坐标pos
+ * 将N和all_edges传入run.js运算得到层次布局下每个结点的坐标pos
  * 并将pos与all_edges传入Vis.vue绘图
  */
 

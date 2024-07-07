@@ -158,7 +158,7 @@ export default class DiffusionModel {
       var pos_noise_predict = await this.onnx_infer(onnx_session, node_emb_tensor, node_level_tensor, pos_tensor, edge_index_tensor, edge_type_tensor);
 
 
-      //去除噪音
+      //根据预测的噪音，去除噪音
       if(i > 0){
         //var eps_linker = torch_randn([pos.length, 2]);
         var eps_linker = randn_like([pos.length, 2]);
@@ -204,7 +204,11 @@ function sigmoid(x) {
   return 1 / (Math.exp(-x) + 1);
 }
 
+
 function get_beta_schedule(beta_start, beta_end, steps){
+  /**
+   * 通过sigmoid获取beta
+   */
 
   var betas = [];
   for (var i = 0; i < steps; i++) {
@@ -217,6 +221,11 @@ function get_beta_schedule(beta_start, beta_end, steps){
 }
 
 function get_alphas(betas){
+
+  /**
+   * 根据betas计算噪音因子alpha
+   */
+  
   var alphas = [];
   var acc = 1;
   

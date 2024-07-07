@@ -2,11 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from process.run import get_dataset
 
-import os, random
-
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADER'] = 'Content-Type'
+
 
 @app.route('/getdata', methods=['POST'])
 @cross_origin()
@@ -32,7 +31,6 @@ def process_data():
     }
 
     return jsonify(response)
-
 
 
 if __name__ == "__main__":

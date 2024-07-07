@@ -5,8 +5,6 @@
 import torch.nn as nn
 from process.transforms import *
 from process.get_layer import layer_graph
-# from transforms import *
-# from try_layer import layer_graph
 import torch
 from torch_geometric.data import Data, Dataset, Batch
 
