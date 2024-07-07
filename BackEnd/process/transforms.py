@@ -15,7 +15,6 @@ AddFragmentEdge()：添加片段边，用于离线边增强。
 import copy
 import torch
 from torch_geometric.data import Data
-from torch_geometric.transforms import Compose
 from torch_geometric.utils import to_dense_adj, dense_to_sparse
 from torch_sparse import coalesce
 import numpy as np

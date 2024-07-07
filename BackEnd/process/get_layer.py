@@ -1,31 +1,18 @@
 '''
 对图网络进行处理，获取分层信息
 '''
-import matplotlib.pyplot as plt
-import math
-import numpy as np
-import torch
-import torch.nn as nn
-from torch_geometric.data import Data
-import pickle, os
-import random
-import pdb
-import csv, ast
-from natsort import natsorted
-import onnxruntime as ort
+
 import networkx as nx
 import pygraphviz as pgv
 
 
 def layer_graph(all_edges):
-        # Create a directed graph
+
         G = nx.DiGraph()
 
-        # Add edges to the graph
         for edge in all_edges:
             G.add_edge(int(edge[0]), int(edge[1]))
 
-        # Use pygraphviz to create a layout
         A = nx.nx_agraph.to_agraph(G)
         A.layout(prog='dot')
 
@@ -65,13 +52,6 @@ if __name__ == '__main__':
 
     node_num = 100
 
-    all_edges = torch.tensor(edges)
-
-    model = data_process()
-
-    node_level = model(node_num, all_edges)
-    
-    print(node_level)
 
     
 

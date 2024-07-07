@@ -1,29 +1,19 @@
 '''
 根据N、all_edges获取数据所需要数据node_emb, node_level, pos_init, edge_index, edge_type
 '''
-import matplotlib.pyplot as plt
-import math
-import numpy as np
-import torch
+
 import torch.nn as nn
-from torch_geometric.data import Data
-
-from natsort import natsorted
-import onnxruntime as ort
-import networkx as nx
-
-from collections import defaultdict
 from process.transforms import *
 from process.get_layer import layer_graph
-#from transforms import *
-#from try_layer import layer_graph
+# from transforms import *
+# from try_layer import layer_graph
 import torch
 from torch_geometric.data import Data, Dataset, Batch
 
 def get_graph_data(all_edges, node_level):
      
     r'''
-    根据网络拓扑结构进行第一步的预处理，使用torch_geometric.data 将图数据打包
+    根据网络拓扑结构进行初步的预处理，使用torch_geometric.data 将图数据打包
     '''
 
     edge_list = np.array(all_edges).tolist()
