@@ -127,7 +127,7 @@ app.listen(port, () => {
 
 #### 2.配置接收服务器的IP与端口：
 
-运行前首先将.\src\components\data_process\get_data.js中IP与端口修改为服务器端的IP与端口
+运行前首先将.\src\components\utility\get_data.js中IP与端口修改为服务器端的IP与端口
 
 ```js
 const response = await axios.post('http://xx.xx.xx.xx:xxxx/getdata', datajson);
@@ -166,7 +166,7 @@ const config = {
 
 
 
-get_new_graph()函数调用.\src\components\data_process\get_data.js,首先将N和all_edges传给后端，接收所需的下列参数：
+get_new_graph()函数调用.\src\components\utility\get_data.js,首先将N和all_edges传给后端，接收所需的下列参数：
 
 ```js
   const node_emb = repoense.node_emb;
