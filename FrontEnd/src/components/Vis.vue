@@ -28,7 +28,7 @@ export default {
   props: {
     pos: Array,
     all_edges: Array,
-  },
+  }, 
   
   data() {
     return {

@@ -1,4 +1,6 @@
-/* 扩散模型 去噪 */
+/**
+ *扩散模型 去噪 
+ */
 
 import ort from 'onnxruntime-web/webgpu';
 // import ort from 'onnxruntime-web';

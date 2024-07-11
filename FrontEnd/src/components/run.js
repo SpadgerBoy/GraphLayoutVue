@@ -1,4 +1,4 @@
-/**
+/** 
  * 根据N、all_edges由模型计算出新的坐标分配
  */
 import DiffusionModel from "./utility/diffusion_model.js";

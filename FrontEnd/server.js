@@ -6,7 +6,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 8080;
-
+ 
 // 设置 Cross-Origin-Opener-Policy 和 Cross-Origin-Embedder-Policy 响应头
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
