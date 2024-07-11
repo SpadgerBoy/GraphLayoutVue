@@ -2,7 +2,7 @@
 
 #### 1.相关依赖：
 
-相关依赖的版本：
+相关依赖的版本： 
 
 ```bash
 conda create -n DiffModel python=3.8
