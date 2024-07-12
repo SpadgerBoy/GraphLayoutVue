@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="liuchi@10.1.114.77:22" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="liguozheng@101.36.73.174:22 agent" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="liguozheng@10.1.114.77:22">
         <serverdata>
@@ -10,6 +10,20 @@
         </serverdata>
       </paths>
       <paths name="liguozheng@10.1.114.77:22 agent">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="liguozheng@101.36.73.174:22">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="liguozheng@101.36.73.174:22 agent">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -66,5 +80,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

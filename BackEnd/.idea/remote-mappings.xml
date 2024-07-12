@@ -17,6 +17,13 @@
             </list>
           </settings>
         </remote-mappings>
+        <remote-mappings server-id="python@sftp://liguozheng@101.36.73.174:22/home/liguozheng/anaconda3/envs/zxd_diff/bin/python3.8">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/home/liguozheng/zxd/BackEnd" />
+            </list>
+          </settings>
+        </remote-mappings>
       </list>
     </list>
   </component>

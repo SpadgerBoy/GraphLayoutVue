@@ -5,7 +5,7 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Remote Python 3.8.19 (sftp://liguozheng@10.1.114.77:22/home/liguozheng/anaconda3/envs/zxd_diff/bin/python3.8)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.8.19 (sftp://liguozheng@101.36.73.174:22/home/liguozheng/anaconda3/envs/zxd_diff/bin/python3.8)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

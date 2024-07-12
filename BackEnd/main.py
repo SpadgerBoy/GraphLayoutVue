@@ -34,8 +34,8 @@ def process_data():
 
 
 if __name__ == "__main__":
-    print('run 10.1.114.77:14449')
-    app.run(host='10.1.114.77', port=14449)
+    print('run 101.36.73.174:14449')
+    app.run(host='101.36.73.174', port=14449)
 
     
 
