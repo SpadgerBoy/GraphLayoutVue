@@ -12,7 +12,7 @@ export default async function getData(num_nodes, all_adges) {
       };
 
     try {
-      const response = await axios.post('http://10.1.114.77:14449/getdata', datajson);
+      const response = await axios.post('http://101.36.73.174:14449/getdata', datajson);
       console.log('Data sent successfully:', response.data);
       var responseMessage = response.data; 
       // console.log(responseMessage);

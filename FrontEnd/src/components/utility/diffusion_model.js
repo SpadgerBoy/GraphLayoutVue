@@ -52,9 +52,9 @@ export default class DiffusionModel {
     this.init();
 
   }
-  //产看webGPU是否可用
+  //产看CPU信息以及webGPU是否可用
   async init() {
-    console.log('Number of CPU threads:', navigator.hardwareConcurrency/2);
+    console.log('Number of CPU threads:', navigator.hardwareConcurrency);
     // 是否支持 WebGPU
     if (!navigator.gpu) {
         alert("WebGPU not supported.");
@@ -75,16 +75,16 @@ export default class DiffusionModel {
     }
 
 
-}
+  }
   //载入onnx模型
   async load_onnx(modelPath) {
     // const executionProviders = ['webgpu', 'webgl', 'webnn', 'wasm'];
-    const executionProviders = ['wasm', 'webgpu', ];
+    const executionProviders = [ 'wasm', 'webgpu',];    //WebAssembly, GPU
 
     for (const provider of executionProviders) {
 
       this.opt.executionProviders = [provider];
-      const sess_opt = { ...this.opt };
+      const sess_opt = { ...this.opt };   //初始化session的配置文件
 
       try {
         const session = await ort.InferenceSession.create(modelPath, sess_opt);
@@ -96,7 +96,6 @@ export default class DiffusionModel {
     }
     throw new Error('All execution providers failed to initialize.');
   }
-
   //使用onnx模型进行推理，
   async onnx_infer(onnx_session, node_emb_tensor, node_level_tensor, pos_tensor, edge_index_tensor, edge_type_tensor){
 
@@ -133,7 +132,7 @@ export default class DiffusionModel {
     }
     //var seq_next = seq.slice(1, seq.length).concat([-1]);
 
-    //是否开启跨域隔离
+    //是否开启了跨域隔离
     console.log('Is cross-origin isolated:', window.crossOriginIsolated);
 
     //载入onnx模型

@@ -2,9 +2,17 @@
 
 #### 1.相关依赖：
 
-相关依赖的版本： 
+cuda版本为11.8，用下列命令查看cuda版本
 
-```bash
+```shell
+nvcc -V
+```
+
+
+
+创建python环境： 
+
+```shell
 conda create -n DiffModel python=3.8
 
 conda activate DiffModel
@@ -20,7 +28,7 @@ pip install -r requirements.txt
 
 安装完对应版本pytorch后可安装requirements/文件夹下的四个轮子.whl
 
-```bash
+```shell
 pip install *.whl
 ```
 
@@ -43,7 +51,8 @@ if __name__ == "__main__":
 
 处理来来自前端的数据
 
-```bash
+```shell
+conda activate DiffModel
 python main.py
 ```
 
@@ -54,6 +63,8 @@ python main.py
 
 
 ### 二、FrontEnd:
+
+#### 1.相关依赖：
 
 安装**pnpm**:
 
@@ -67,17 +78,23 @@ npm install pnpm -g
 pnpm i
 ```
 
-运行:
+#### 2.配置IP地址：
 
-```bash
+运行前首先将.\src\components\utility\get_data.js中IP与端口修改为服务器端的IP与端口
 
-pnpm run start
-
+```js
+const response = await axios.post('http://xx.xx.xx.xx:xxxx/getdata', datajson);
 ```
 
-tips：
+#### 3.run code:
 
-#### 1.跨域隔离
+```bash
+pnpm run start
+```
+
+#### 4.部分代码说明：
+
+###### 1）.跨域隔离
 
 前端中涉及到模型多线程运算，所以需要开启跨域隔离
 
@@ -125,23 +142,15 @@ app.listen(port, () => {
 });
 ```
 
-#### 2.配置接收服务器的IP与端口：
-
-运行前首先将.\src\components\utility\get_data.js中IP与端口修改为服务器端的IP与端口
-
-```js
-const response = await axios.post('http://xx.xx.xx.xx:xxxx/getdata', datajson);
-```
 
 
-
-#### 3.文件./src/APP.vue
+###### 2）.文件./src/APP.vue
 
 从一个txt文件中读取节点数量N和图的所有边all_edges，该文件将调用./src/components/run.js处理这些参数
 
 
 
-#### 4.文件./src/components/run.js
+###### 3）.文件./src/components/run.js
 
 配置模型的参数：
 
@@ -180,7 +189,7 @@ get_new_graph()函数调用.\src\components\utility\get_data.js,首先将N和all
 
 
 
-#### 5.文件./src/components/Vis.vue
+###### 4）.文件./src/components/Vis.vue
 
 根据all_edges和新的pos画图
 
